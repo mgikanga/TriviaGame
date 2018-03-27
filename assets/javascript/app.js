@@ -15,15 +15,24 @@ $("#buton").on("click", function () {
 function display() {
     countDown();
     $("#quiz").html("<h3>" + text + "</h3>");
-    for(var i=0; i<optionArr.length;i++){
-        $("#quiz").append("<button id = 'pick'>" + optionArr[i] + "</button>");
-        $("#pick").on("click", function () {
-   
-            
-        })
-        
-      console.log(optionArr[i]);
-      }      
+      $(function() {
+       optionArr;
+        var myButtons = $("#custom_buttons");
+        $.each(optionArr, function(index, value) {
+            myButtons.append("<button class=std_buttons value=" + value + ">" + value + "</button>");
+        });
+    
+        $("button.std_buttons").click(function () {
+            var userPick = $(this).val();
+            if(userPick===answer){
+                $("#win").html("<h3>" + "CORRECT!!" + "</h3>");
+                $("#custom_buttons").hide();
+                console.log("win");
+            }
+         console.log(userPick);
+        });
+    
+    });    
 }
 
 //countdown function
@@ -72,7 +81,7 @@ var optionB = questions[0].options[1]
 var optionC = questions[0].options[2]
 var optionD = questions[0].options[3]
 console.log(text);
-//compare the user pick and answer
+
 
 
 /* For The Hobbit related questoin
