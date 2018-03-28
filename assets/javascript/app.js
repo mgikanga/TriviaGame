@@ -12,7 +12,7 @@ $("#buton").on("click", function () {
 
 })
 //funtion to display text on webpage
-function display() {
+function display(questionNumber) {
     countDown();
     $("#quiz").html("<h3>" + text + "</h3>");
       $(function() {
@@ -27,6 +27,7 @@ function display() {
             if(userPick===answer){
                 $("#win").html("<h3>" + "CORRECT!!" + "</h3>");
                 $("#custom_buttons").hide();
+                moveOn();
                 console.log("win");
             }
          console.log(userPick);
@@ -40,7 +41,7 @@ function countDown() {
     time--;
     $("#clock").html("<h3>Time remaining: " + time + " seconds</h3>")
     if (time <= 0) {
-        $("#clock").html("You run out of time");
+        $("#clock").html("You run out of time!!");
         return;
 
     }
@@ -71,7 +72,7 @@ var questions = [
 
 ];
 
-// For the Norway question
+/* For the Norway question
 var selected;
 var text = questions[0].text;
 var answer = questions[0].answer;
@@ -80,17 +81,23 @@ var optionA = questions[0].options[0]
 var optionB = questions[0].options[1]
 var optionC = questions[0].options[2]
 var optionD = questions[0].options[3]
-console.log(text);
+console.log(text);*/
 
 
 
-/* For The Hobbit related questoin
-var questionNumber = 1;
+//For The Hobbit related questoin
+var questionNumber = 0;
 var text = questions[questionNumber].text;
 var answer = questions[questionNumber].answer;
+var optionArr=questions[questionNumber].options;
 
 for (var i = 0; i < questions.length; i++) {
-   
+    console.log("This is the text");
     console.log(questions[i].text);
 }
-//function move on*/
+
+//function move on
+function moveOn() {
+    questionNumber++;
+    display(questions[questionNumber]);
+}
