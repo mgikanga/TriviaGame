@@ -14,24 +14,28 @@ $(document).ready(function () {
             answer: "Oslo",
             options: ["Helsinki", "Oslo", "Copenhagen"],
             image: "assets/images/oslo.jpg",
+            detail:"The Nobel Peace Prize award ceremony is held every year in Oslo City Hall",
         },
         {
             text: "What is the capital of New York",
             answer: "Albany",
             options: ["New York City", "Albany", "Manhantan", "Brooklyn"],
             image: "assets/images/albany.jpg",
+            detail:" The very first passenger railroad in America, was the Mohawk and Hudson River Railroad, was invented here. It ran from the intersection of Albany's Western and Madison Avenues into downtown Schenectady",
         },
         {
             text: "What is the capital of New Mexico?",
             answer: "Santa Fe",
             options: ["Helsinki", "Santa Fe", "Copenhagen"],
             image: "assets/images/santa-fe.jpg",
+            detail:"Santa Fe's full name is La Villa Real de la Santa Fé de San Francisco de Asís­–the Royal Town of the Holy Faith of Saint Francis of Assisi.",
         },
         {
             text: "What is the capital of Arizona?",
             answer: "Phoenix",
             options: ["Helsinki", "Oslo", "Phoenix"],
             image: "assets/images/phoenix.jpg",
+            detail:"Forget “falling forward” and “springing back”. There is NO daylight savings time in Phoenix."
         },
 
     ];
@@ -84,11 +88,11 @@ $(document).ready(function () {
         // Display the question, i'm using question to number to access every question
 
 
-        question.html(text)
+        question.append(questions[questionNumber].text)
         $(function () {
-            optionArr;
+           
             var myButtons = $(questionArea);
-            $.each(optionArr, function (index, value) {
+            $.each(questions[questionNumber].options, function (index, value) {
                 myButtons.append("<button class=std_buttons value=" + value + ">" + value + "</button>");
             });
 
@@ -121,14 +125,17 @@ $(document).ready(function () {
         // Declare content that will go into the messageArea
         var winMessage = $("<h2>");
         var answer = $("<h2>")
+        var detail = $("<p>")
         var image = $("<img>")
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
         winMessage.appendTo($(messageArea));
+       detail.appendTo($(messageArea));
         image.appendTo($(messageArea))
         winMessage.text("You Got It Right!!");
-        answer.text(questions[questionNumber].answer)
+        detail.html(questions[questionNumber].detail)
         image.attr("src", questions[questionNumber].image)
+      
 
         //if no questios are left
         if (questionNumber === questions.length - 1) {
@@ -143,8 +150,8 @@ $(document).ready(function () {
         var cycle = setTimeout(display, 7000)
         var messageArea = $("<div>");
         messageArea.addClass("message-content")
-        var lossMessage = $("<h2>");
-        var detail = $("<h2>")
+        var lossMessage = $("<h3>");
+        var detail = $("<h4>")
         var image = $("<img>")
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
@@ -168,8 +175,8 @@ $(document).ready(function () {
         var cycle = setTimeout(display, 7000);
         var messageArea = $("<div>");
         messageArea.addClass("message-content")
-        var lossMessage = $("<h2>");
-        var detail = $("<h2>")
+        var lossMessage = $("<h3>");
+        var detail = $("<h4>")
         var image = $("<img>")
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
@@ -189,7 +196,7 @@ $(document).ready(function () {
     function gameOver() {
         // Clear out the post-question message
         $(".message-content").remove();
-        var totalCorrect = $("<h3>")
+        var totalCorrect = $("<h2>")
         var totalIncorrect = $("<h3>")
         var totalNone = $("<h3>")
         var restart = $("<button>")

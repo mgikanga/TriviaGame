@@ -1,8 +1,51 @@
-button{
+body{
+    background-image: url("../images/bk.png");
+}
+h1{
+    padding: 1%;
+    color: lightseagreen;
+    text-align: center;
+    font-family: 'Abril Fatface', cursive;
+
+}
+h2{
+    padding: 1%;
+    color: green;
+}
+h3{
+    padding: 1%;
+    color: darkred;
+}
+.begin{
+    color:white;
+    width: 15%;
     display: block;
-   width: 13%;
-   padding: 7px;
-   margin: 1%;
-   background-color: lightblue;
-   font-size: 16px;
+padding: 3%;
+   margin: auto;
+  
+   background-color: green;
+   font-size: 22px;
+}
+.std_buttons {
+    color:white;
+  width: 20%;
+  display: block;
+padding: 1%;
+   margin-left: 40% ;
+   background-color: lightseagreen;
+   font-size: 18px;
+}
+#content{
+    box-sizing: border-box; 
+    text-align: center;
+    align-content: center;
+    box-sizing: border-box; 
+    margin-top: 10%;
+    background-color: lightgray;
+    height: 500px;
+    padding-bottom: 20%;
+}
+img{
+    width: 600px;
+    height: 300px;
 }
