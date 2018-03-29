@@ -3,18 +3,21 @@ body{
 }
 h1{
     padding: 1%;
-    color: lightseagreen;
+    color: seagreen;
     text-align: center;
     font-family: 'Abril Fatface', cursive;
 
 }
 h2{
-    padding: 1%;
+ padding-top: 1%;
+ font-size: 34px;
     color: green;
+    font-family: 'Abril Fatface', cursive;
 }
 h3{
     padding: 1%;
     color: darkred;
+    font-family: 'Abril Fatface', cursive;
 }
 .begin{
     color:white;
@@ -22,11 +25,16 @@ h3{
     display: block;
 padding: 3%;
    margin: auto;
-  
    background-color: green;
    font-size: 22px;
 }
+.begin:hover{
+    color: wheat;
+    opacity: 0.7;
+}
 .std_buttons {
+    letter-spacing: 2px;
+    font-family: 'Abril Fatface', cursive;
     color:white;
   width: 20%;
   display: block;
@@ -35,13 +43,17 @@ padding: 1%;
    background-color: lightseagreen;
    font-size: 18px;
 }
+.std_buttons:hover{
+    background-color: seagreen;
+    border: solid  grey;
+}
 #content{
     box-sizing: border-box; 
     text-align: center;
     align-content: center;
     box-sizing: border-box; 
     margin-top: 10%;
-    background-color: lightgray;
+    background-color: peachpuff;
     height: 500px;
     padding-bottom: 20%;
 }

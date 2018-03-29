@@ -7,33 +7,33 @@ $(document).ready(function () {
     var wins = 0;
     var losses = 0;
     var none = 0;
-    // object for questions
+    // object for questions array
     var questions = [
         {
             text: "What is the capital of Norway?",
             answer: "Oslo",
-            options: ["Helsinki", "Oslo", "Copenhagen"],
+            options: ["Helsinki", "Oslo", "Phoenix","Copenhagen"],
             image: "assets/images/oslo.jpg",
             detail:"The Nobel Peace Prize award ceremony is held every year in Oslo City Hall",
         },
         {
-            text: "What is the capital of New York",
+            text: "What is the capital of New York?",
             answer: "Albany",
             options: ["New York City", "Albany", "Manhantan", "Brooklyn"],
             image: "assets/images/albany.jpg",
-            detail:" The very first passenger railroad in America, was the Mohawk and Hudson River Railroad, was invented here. It ran from the intersection of Albany's Western and Madison Avenues into downtown Schenectady",
+            detail:" The very first passenger railroad in America, the Mohawk and Hudson River Railroad, was invented here.",
         },
         {
             text: "What is the capital of New Mexico?",
-            answer: "Santa Fe",
-            options: ["Helsinki", "Santa Fe", "Copenhagen"],
+            answer: "Santa-Fe",
+            options: ["Helsinki","Santa-Fe", "Phoenix","Copenhagen"],
             image: "assets/images/santa-fe.jpg",
             detail:"Santa Fe's full name is La Villa Real de la Santa Fé de San Francisco de Asís­–the Royal Town of the Holy Faith of Saint Francis of Assisi.",
         },
         {
             text: "What is the capital of Arizona?",
             answer: "Phoenix",
-            options: ["Helsinki", "Oslo", "Phoenix"],
+            options: ["Helsinki", "Oslo", "Phoenix","Copenhagen"],
             image: "assets/images/phoenix.jpg",
             detail:"Forget “falling forward” and “springing back”. There is NO daylight savings time in Phoenix."
         },
@@ -41,22 +41,15 @@ $(document).ready(function () {
     ];
 
     var questionNumber = 0;
-    var answer = questions[questionNumber].answer;
-    var text = questions[questionNumber].text;
-    var optionArr = questions[questionNumber].options;
-    
-    //timer function
+   
+    //start function
     $("#buton").on("click", function () {
         $(this).hide();
-        //intervalId = setInterval(countDown, 1000)
         display();
 
     })
 
     //funtion to display text on webpage
-    //create container to hold the questions and answers
-
-
     function display() {
         $("#content").empty();
         //create container to hold the questions and answers
@@ -68,7 +61,7 @@ $(document).ready(function () {
         questionArea.appendTo("#content")
         timer.appendTo(questionArea)
         question.appendTo(questionArea)
-        // $("#quiz").html("<h3>" + text + "</h3>");
+        // set up the timer
         var time = 30;
         timer.html("<h2>" + time + " seconds remaining</h2>")
 
@@ -85,12 +78,11 @@ $(document).ready(function () {
             }
         }, 1000);
 
-        // Display the question, i'm using question to number to access every question
+        // Display the question, i'm using questionnumber to access every question
 
 
         question.append(questions[questionNumber].text)
         $(function () {
-           
             var myButtons = $(questionArea);
             $.each(questions[questionNumber].options, function (index, value) {
                 myButtons.append("<button class=std_buttons value=" + value + ">" + value + "</button>");
@@ -98,8 +90,9 @@ $(document).ready(function () {
 
             $("button.std_buttons").click(function () {
                 var userPick = $(this).val();
-                //if the pick is correct
-                if (userPick === answer) {
+                //if the pick is correct then display the win screen 
+                //if wrong the lossing screen
+                if (userPick === questions[questionNumber].answer ) {
                     questionArea.fadeToggle("slow", displayCorrect)
                     clearInterval(countDown);
                     wins++;
@@ -117,7 +110,7 @@ $(document).ready(function () {
 
 
 
-    //function to display the corect info
+    //function to display when aswer is corect 
     function displayCorrect() {
         var cycle = setTimeout(display, 7000)
         var messageArea = $("<div>");
@@ -125,7 +118,7 @@ $(document).ready(function () {
         // Declare content that will go into the messageArea
         var winMessage = $("<h2>");
         var answer = $("<h2>")
-        var detail = $("<p>")
+        var detail = $("<h4>")
         var image = $("<img>")
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
@@ -137,7 +130,7 @@ $(document).ready(function () {
         image.attr("src", questions[questionNumber].image)
       
 
-        //if no questios are left
+        //if no questios are left then the game is over
         if (questionNumber === questions.length - 1) {
             clearTimeout(cycle);
             var gameEnd = setTimeout(gameOver, 7000)
@@ -155,10 +148,11 @@ $(document).ready(function () {
         var image = $("<img>")
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
-        lossMessage.appendTo(messageArea)
+        lossMessage.appendTo($(messageArea))
         detail.appendTo($(messageArea))
         image.appendTo($(messageArea))
         lossMessage.html("Wrong! The right answer is " + questions[questionNumber].answer);
+        detail.html(questions[questionNumber].detail)
         image.attr("src", questions[questionNumber].image);
 
         // If there are no questions left, then run this function to display gameOver
@@ -224,9 +218,9 @@ $(document).ready(function () {
             totalIncorrect.remove();
             totalNone.remove();
             restart.remove();
-            currentQuestion = 0;
-            correct = 0; //records number of correct answers
-            wrong = 0; //records number of wrong answers
+            questionNumber = 0;
+            var wins = 0;
+            var losses = 0;
             none = 0;
             display();
         })
