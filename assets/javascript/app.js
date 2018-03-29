@@ -1,9 +1,49 @@
 //my global variables
+$(document).ready( function() {
 var time = 31;
 var intervalId;
 var answer;
 var userPick;
+var wins=0;
+var losses = 0;
+// object for questions
+var questions = [
+    {
+        text: "What is the capital of Norway?",
+        answer: "Oslo",
+        options: ["Helsinki", "Oslo", "Copenhagen"],
+        image: "assets/images/oslo.jpg",
+    },
+    {
+        text: "What is the capital of New York",
+        answer: "Albany",
+        options: ["New York City", "Albany", "Manhantan", "Brooklyn"],
+        image: "assets/images/albany.jpg",
+    },
+    {
+        text: "What is the capital of New Mexico?",
+        answer: "Santa Fe",
+        options: ["Helsinki", "Santa Fe", "Copenhagen"],
+        image: "assets/images/santa-fe.jpg",
+    },
+    {
+        text: "What is the capital of Arizona?",
+        answer: "Phoenix",
+        options: ["Helsinki", "Oslo", "Phoenix"],
+        image: "assets/images/phoenix.jpg",
+    },
 
+];
+
+var questionNumber = 0;
+var currentQuestion = questions[questionNumber];
+var answer =currentQuestion.answer;
+var text = currentQuestion.text;
+var optionArr = currentQuestion.options;
+for (var i = 0; i < questions.length; i++) {
+   
+    console.log(questions[i].text);
+};
 //timer function
 $("#buton").on("click", function () {
     $(this).hide();
@@ -11,10 +51,20 @@ $("#buton").on("click", function () {
     display();
 
 })
+//countdown function
+function countDown() {
+    time--;
+    $("#clock").html("<h3>Time remaining: " + time + " seconds</h3>")
+    if (time === 0) {
+        clearInterval(countDown);
+        $("#clock").html("You run out of time!!");
+    }
+}
 //funtion to display text on webpage
-function display(questionNumber) {
+function display() {
     countDown();
     $("#quiz").html("<h3>" + text + "</h3>");
+
       $(function() {
        optionArr;
         var myButtons = $("#custom_buttons");
@@ -25,10 +75,12 @@ function display(questionNumber) {
         $("button.std_buttons").click(function () {
             var userPick = $(this).val();
             if(userPick===answer){
-                $("#win").html("<h3>" + "CORRECT!!" + "</h3>");
-                $("#custom_buttons").hide();
-                moveOn();
-                console.log("win");
+                questionNumber++;
+                 winAdd();
+               
+            }
+            else{
+                lossAdd();
             }
          console.log(userPick);
         });
@@ -36,68 +88,58 @@ function display(questionNumber) {
     });    
 }
 
-//countdown function
-function countDown() {
-    time--;
-    $("#clock").html("<h3>Time remaining: " + time + " seconds</h3>")
-    if (time <= 0) {
-        $("#clock").html("You run out of time!!");
-        return;
 
-    }
+function resultDisplay(){
+    screenTime--;
 }
 
-// object for questions
-var questions = [
-    {
-        text: "What is the capital of Norway?",
-        answer: "Oslo",
-        options: ["Helsinki", "Oslo", "Copenhagen"],
-    },
-    {
-        text: "What is the capital of New York",
-        answer: "Albany",
-        options: ["New York City", "Albany", "Manhantan", "Brooklyn"],
-    },
-    {
-        text: "What is the capital of New Mexico?",
-        answer: "Santa Fe",
-        options: ["Helsinki", "Santa Fe", "Copenhagen"],
-    },
-    {
-        text: "What is the capital of Arizona?",
-        answer: "Phoenix",
-        options: ["Helsinki", "Oslo", "Phoenix"],
-    },
+// function for all questions
 
-];
-
-/* For the Norway question
-var selected;
-var text = questions[0].text;
-var answer = questions[0].answer;
-var optionArr=questions[0].options;
-var optionA = questions[0].options[0]
-var optionB = questions[0].options[1]
-var optionC = questions[0].options[2]
-var optionD = questions[0].options[3]
-console.log(text);*/
-
-
-
-//For The Hobbit related questoin
-var questionNumber = 0;
-var text = questions[questionNumber].text;
-var answer = questions[questionNumber].answer;
-var optionArr=questions[questionNumber].options;
-
+/*
 for (var i = 0; i < questions.length; i++) {
     console.log("This is the text");
     console.log(questions[i].text);
 }
-
+*/
 //function move on
 function moveOn() {
-    questionNumber++;
-    display(questions[questionNumber]);
+    if(questionNumber<questions.length){
+        $("#clock").remove();
+  $(".clock").remove();
+  $("#quiz").remove();
+  $("#custom_buttons").remove();
+  $("#quiz").remove();
+  $("#win").remove();
+  (display,2000);
 }
+
+}
+//function winnig
+function winAdd(){
+    $("#win").html("<h3>" + "CORRECT!!" + "</h3>");
+    wins++;
+    console.log(wins);
+                $("#custom_buttons").hide();
+                clearInterval(countDown); 
+$("#clock").hide();
+    $(".clock").html("<h3>Time remaining: " + time + " seconds</h3>");
+    setTimeout(moveOn, 2000);
+}
+
+//function losing
+function lossAdd(){
+    $("#win").html("<h3>" + "WRONG!! " + "It's " + answer+   "</h3>");
+    losses++;
+    console.log(losses);
+                $("#custom_buttons").hide();
+                clearInterval(countDown); 
+$("#clock").hide();
+    $(".clock").html("<h3>Time remaining: " + time + " seconds</h3>")
+           
+}
+
+//button to reset
+$("#reset").on("click", function () {
+  
+})
+})
