@@ -12,36 +12,64 @@ $(document).ready(function () {
         {
             text: "What is the capital of Norway?",
             answer: "Oslo",
-            options: ["Helsinki", "Oslo", "Phoenix","Copenhagen"],
+            options: ["Helsinki", "Oslo", "Phoenix", "Copenhagen"],
             image: "assets/images/oslo.jpg",
-            detail:"The Nobel Peace Prize award ceremony is held every year in Oslo City Hall",
+            detail: "The Nobel Peace Prize award ceremony is held every year in Oslo City Hall",
         },
         {
             text: "What is the capital of New York?",
             answer: "Albany",
             options: ["New York City", "Albany", "Manhantan", "Brooklyn"],
             image: "assets/images/albany.jpg",
-            detail:" The very first passenger railroad in America, the Mohawk and Hudson River Railroad, was invented here.",
+            detail: " The very first passenger railroad in America, the Mohawk and Hudson River Railroad, was invented here.",
         },
         {
             text: "What is the capital of New Mexico?",
             answer: "Santa-Fe",
-            options: ["Helsinki","Santa-Fe", "Phoenix","Copenhagen"],
+            options: ["Helsinki", "Santa-Fe", "Phoenix", "Copenhagen"],
             image: "assets/images/santa-fe.jpg",
-            detail:"Santa Fe's full name is La Villa Real de la Santa Fé de San Francisco de Asís­–the Royal Town of the Holy Faith of Saint Francis of Assisi.",
+            detail: "Santa Fe's full name is La Villa Real de la Santa Fé de San Francisco de Asís­–the Royal Town of the Holy Faith of Saint Francis of Assisi.",
         },
         {
             text: "What is the capital of Arizona?",
             answer: "Phoenix",
-            options: ["Helsinki", "Oslo", "Phoenix","Copenhagen"],
+            options: ["Helsinki", "Oslo", "Phoenix", "Copenhagen"],
             image: "assets/images/phoenix.jpg",
-            detail:"Forget “falling forward” and “springing back”. There is NO daylight savings time in Phoenix."
+            detail: "Forget “falling forward” and “springing back”. There is NO daylight savings time in Phoenix."
         },
 
+        {
+            text: "What is the capital of Alabama?",
+            answer: "Montgomery",
+            options: ["Helsinki", "Oslo", "Phoenix", "Montgomery"],
+            image: "assets/images/Montgommery.jpg",
+            detail: "is named after Richard Montgomery, he fought in the American Revolution and died during the Benedict Arnold’s expedition against Quebec.",
+        },
+        {
+            text: "What is the capital of Alaska?",
+            answer: "Juneau",
+            options: ["Juneau", "Albany", "Manhantan", "Brooklyn"],
+            image: "assets/images/juneau.jpg",
+            detail: " In 1916, the Alaska-Juneau gold mine was built on the mainland and became the largest operation of its kind in the world.",
+        },
+        {
+            text: "What is the capital of Arkansas?",
+            answer: "Little-Rock",
+            options: ["Helsinki", "Santa-Fe", "Little-Rock", "Copenhagen"],
+            image: "assets/images/little-rock.jpg",
+            detail: " The Esse Purse Museum,the only brick-and-mortar purse museum in the country is in Little Rock",
+        },
+        {
+            text: "What is the capital of California?",
+            answer: "Sacramento",
+            options: ["San Francisco", "Sacramento", "San Jose", "Vallejo"],
+            image: "assets/images/sacramento.jpg",
+            detail: "Sacramento is actually two cities in one; a large network of tunnels remain beneath the foundation of the city."
+        },
     ];
 
     var questionNumber = 0;
-   
+
     //start function
     $("#buton").on("click", function () {
         $(this).hide();
@@ -92,7 +120,7 @@ $(document).ready(function () {
                 var userPick = $(this).val();
                 //if the pick is correct then display the win screen 
                 //if wrong the lossing screen
-                if (userPick === questions[questionNumber].answer ) {
+                if (userPick === questions[questionNumber].answer) {
                     questionArea.fadeToggle("slow", displayCorrect)
                     clearInterval(countDown);
                     wins++;
@@ -123,12 +151,12 @@ $(document).ready(function () {
         // Append it all to the content container and add text and images
         messageArea.appendTo($("#content"));
         winMessage.appendTo($(messageArea));
-       detail.appendTo($(messageArea));
+        detail.appendTo($(messageArea));
         image.appendTo($(messageArea))
         winMessage.text("You Got It Right!!");
         detail.html(questions[questionNumber].detail)
         image.attr("src", questions[questionNumber].image)
-      
+
 
         //if no questios are left then the game is over
         if (questionNumber === questions.length - 1) {
@@ -155,7 +183,7 @@ $(document).ready(function () {
         detail.html(questions[questionNumber].detail)
         image.attr("src", questions[questionNumber].image);
 
-        // If there are no questions left, then run this function to display gameOver
+        // If there are no questions left, then run this function to display gameOver else incerement questionnumber
         if (questionNumber === (questions.length - 1)) {
             clearTimeout(cycle);
             var gameEnd = setTimeout(gameOver, 7000)
@@ -164,7 +192,7 @@ $(document).ready(function () {
         console.log(questionNumber);
     };
 
-    //timeout screen
+    //timeout screen for when user run out of time
     function timedOut() {
         var cycle = setTimeout(display, 7000);
         var messageArea = $("<div>");
